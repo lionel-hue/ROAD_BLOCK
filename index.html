@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+          <style>
+          body{ 
+margin:0; 
+font-family: 'Nunito', sans-serif;
+user-select:none;}
+
+
+#canvas{
+position: absolute;
+}
+
+#game_over{
+background:white;
+width:80%;
+height:20%;
+border-radius:0.5rem;
+display:block;
+box-shadow:2px 2px 2px rgba(0,0,0,0.19);
+top:-100%/*10%*/;
+left:10%;
+position:absolute;
+z-index:3;
+transition:1.5s;
+overflow-x:hidden;
+overflow-y:scroll;
+}
+
+#game_over *{
+text-align:center;
+justify-content:center;
+align-items:center;
+display:block;
+}
+
+
+#game_over div{
+font-weight:900;
+
+}
+
+#game_over b{
+position:absolute;
+width:40%;
+left:30%;
+background:rgba(0,0,0,0.2);
+border-radius:0.5rem;
+display:none;
+}
+
+
+#health_logo, #health, #high_score{
+position:fixed;
+z-index:3;
+display:none;
+}
+
+
+#health{
+font-weight:600;
+color:lightGreen; 
+top:2%; 
+left:88.5%;     
+}
+
+
+#health_logo{
+top:2%;  
+left:82.5%;
+}
+
+
+#high_score{
+top:2%;
+left:2%;
+font-weight:600;
+background:rgba(0,0,0,0.3);
+padding-left:2%;
+padding-right:2%;
+border-radius:0.5rem;
+color:white;
+}
+
+
+#home{
+z-index:2;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;    
+}
+
+
+#start{
+z-index:3;
+position:fixed;
+background:yellow;
+width:40vw;
+height:40vw;
+text-align:center;
+justify-content:center;
+display:flex;
+font-weight:900;
+font-size:24px;
+transform:rotate(-45deg);
+border-radius:0.5rem;
+top:90%;
+left:80%;
+animation-name:glow;    
+animation-duration:1.5s;
+animation-iteration-count:3;
+display:none;
+}
+
+@keyframes glow{
+      from{background:black;}
+        to{background:yellow;}
+}
+
+
+.title{
+      position:fixed;
+      z-index:3;
+      top:-3%;
+      font-weight:600;
+      font-size:35px;
+      background:rgba(0,0,0,0.3);
+      left:23%;
+      padding-left:2%;
+      padding-right:2%;
+      border-radius:0.9rem;
+      font-family: 'Bebas Neue', cursive;
+}
+
+
+#lionel{
+position:fixed;
+z-index:3;
+top:97.15%;
+text-align:center;
+justify-content:center;
+display:flex;
+font-weight:600;
+font-size:15px;
+background:white;
+left:0;
+padding-left:2%;
+padding-right:2%;
+border-top-right-radius:0.9rem;
+color:black;
+text-decoration:none;
+animation-name:bounce;
+animation-duration:2s;
+animation-iteration-count:infinite;
+}
+
+@keyframes bounce{
+          from{background:black;color:white;}
+           50%{background:white;color:black;}
+           to{background:black;color:white;}
+}
+
+.leaderBoard, .login, .info, .acc_name{
+position:fixed;
+z-index:3;
+width:20vw;
+height:20vw;
+background:black;
+color:white;
+border-radius:50%;
+font-size:19px;
+border:none;
+text-align:right;
+transition:1s;
+}
+
+
+.leaderBoard, .login, .info, .acc_name:hover{
+outline:none;
+}
+
+.leaderBoard{
+top:30%;
+left:-10%;
+}
+
+
+
+
+.info{
+top:70%;
+left:-10%;
+}
+
+
+
+.acc_name{
+top:50%;
+left:-10%;
+}
+
+
+
+#active_page{
+position:fixed;
+width:98%;
+height:40%;
+top:100%;
+left:1%;
+background:black;
+z-index:4;
+border-top-left-radius:0.9rem;
+border-top-right-radius:0.9rem;
+transition:1s;
+color:white; 
+text-align:center;
+overflow-y:scroll;
+overflow-x:hidden; 
+}
+
+
+
+
+
+#active_page #l_header, #name_header,#create{
+background:rgb(0,25,225);
+padding:2% 2% 2% 2%;
+border-radius:0.5rem;
+box-shadow:inset 0 2px 2px white;
+}
+
+
+#active_page #l_caption{
+width:100%;
+background:rgba(40,40,40);
+display:flex;
+justify-content:space-between;
+align-items:center;
+height:12%;
+}
+
+
+#active_page #l_score{
+background:rgb(40,40,40);
+width:96%;
+position:relative;  
+margin-top:0.5%;
+padding:0.5% 0 0.5% 0;
+border-radius:0.5rem;
+left:3%;
+display:flex;
+justify-content:space-between;
+}
+
+
+#active_page #acc_name_input{
+width:80%;
+border:none;
+background:black;
+border-bottom:2px solid red;
+height:10%;
+color:white;
+text-align:center;
+}
+
+
+#active_page #acc_name_input:hover{
+outline:none; 
+}
+
+
+#active_page #create{
+background:rgb(0,225,25);}
+
+
+#xancel{
+position:fixed;
+z-index:4;
+top:60%;
+left:90%;
+transition:1s;
+display:none;}
+
+
+#sound_track_1{
+    position:fixed;
+    z-index:4;
+    left:0;
+    display:none;
+}
+          </style>
+
+<script src= "road_Block.js"></script>
+<link rel= "stylesheet" href="r_b.css"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+<script>
+window.onload= ()=>{
+
+    let canvas =  
+  document.getElementsByTagName("canvas")[0];
+   
+   canvas.width= window.innerWidth;
+   canvas.height=window.innerHeight;
+
+
+
+
+
+
+           
+let car = new Image();
+  
+let FPS, highscore,number=0,explosion,number_speed,velocity=0.6,leaderBoard,info,database,new_dB={},acc_name,name;
+  
+  
+explosion = "https://i.ibb.co/J7bTCY7/photo-clipart-explosion-0.png";
+  
+   
+  car.src=       "https://i.ibb.co/RpfwxjR/1633965503589.png";
+ 
+
+
+  
+let game_over_frame= document.createElement("div");
+game_over_frame.id= "game_over";
+document.body.appendChild(game_over_frame);
+
+
+
+
+gameOver=()=>{
+    
+game_over_frame.innerHTML=
+
+`<div>GAME OVER</div><hr/><p>high score:
+ ${number} </p>
+  <strong> tap to continue!!! </strong>
+ `;
+
+    game_over_frame.style.top= "10%";
+    
+    game_over_frame.onclick=()=>
+      {game_over_frame.style.top="-100%";
+          game_menu.style.display= "block";
+    health_logo.style.display= "none";
+    health.style.display=      "none"; 
+    high_score.style.display=  "none"; 
+       };
+    
+  
+};
+
+
+
+
+
+
+health_indicator=()=>{
+     switch(health.innerHTML <=100){
+case health.innerHTML <=100 && health.innerHTML >49  :
+          health.style.color = "lighGreen";
+            break;
+                 
+case health.innerHTML <=49 &&    health.innerHTML >30 :
+          health.style.color = "yellow";
+            break;
+            
+case health.innerHTML <=30 && health.innerHTML >20:
+         health.style.color  = "orange";
+            break;
+            
+case health.innerHTML <=20 :
+         health.style.color  = "red";
+            break;
+
+case health.innerHTML<=0 : health.innerHTML=0;                    
+     }
+};
+
+
+
+highScore =()=>{ 
+    number = 0;
+ number_speed = setInterval(()=>{
+           number += 1;
+high_score.innerHTML = `High Score : ${number}`;
+       },10);
+}; 
+ 
+
+
+xancel.onclick=()=>{
+  active_page.style.top="100%";
+  xancel.style.display = "none";
+  start.style.display = 'block';
+    };
+ 
+  
+setTimeout(()=>{
+     active_page.style.top="60%";
+setTimeout(()=>{xancel.style.display="block";},1000);
+
+active_page.innerHTML= 
+`<br><br><b>Quick Help</b><p>go to the "ℹ️" section  here in main menu and read on how to play!<br><br><br><b>⚠️Note⚠️</b><br><p>you need a stable internet connection to load the game resources fully or the app might malfunction</p>`; 
+},1200);
+
+
+
+
+active_box_check=()=>{
+
+if(active_page.style.top=="60%"){
+    active_page.style.top="100%";    setTimeout(()=>{xancel.style.display="none";},1000);
+   }
+else {
+     active_page.style.top="60%";
+setTimeout(()=>{xancel.style.display="block";},1000) }
+
+sound_track_1.play();    
+};
+
+
+leaderBoard =document.querySelector(".leaderBoard");
+
+leaderBoard.onclick=function(){
+  active_box_check();
+active_page.innerHTML=`
+<br><b id= "l_header">leaderboard</b><br><br>
+<div id="l_caption">
+<p style='text-align:right;'>#</p>  
+<p style="text-align:center;">Names</p>
+<p style='text-align:left;'>High score</p></div>
+`;
+
+(name ==undefined)? name= "me":"lmao XD";
+
+database = {
+         "molly" : 0,
+         "artem" : 0,
+        "M•∆R•S" :0,   
+     "«lio★nel»" :0,
+ "supreme†Gamer" : 0,
+           "‡‡‡" : 0,
+         "D∆RK™" : 0,
+        "NOMBA_1": 0,
+     "‹victoria›": 0 };
+     
+dB_entries = Object.entries(database);
+ 
+ dB_entries.forEach((item,index)=>{
+   dB_entries[index][1] =Math.floor(Math.random()*200);
+ (dB_entries[index][1]  <10)?dB_entries[index][1] =10:1;
+  });
+
+dB_entries.push([name,number]);
+dB_entries.sort((a,b)=>b[1]-a[1]);
+new_dB = Object.fromEntries(dB_entries);
+ data_keys = Object.keys(new_dB);   
+ data_vals = Object.values(new_dB);   
+ 
+  for(i=0;i<dB_entries.length;i++){
+
+
+let p_i_b=document.createElement("div");
+   active_page.appendChild(p_i_b);
+   p_i_b.id = "l_score";
+ 
+ p_i_b.innerHTML = `
+ <p style='text-align:left;'>${i}</p>    <p style='text-align:center;'>${data_keys[i]}</p> <p style='text-align:left;'>${data_vals[i]}</p>
+ `;
+   
+   }
+};
+
+
+
+acc_name =document.querySelector(".acc_name");
+
+acc_name.onclick=function(){
+  active_box_check();
+  active_page.innerHTML= `
+<br/> <b id="name_header">My Name</b>
+<br><br><h3>My name is...</h3>
+<textarea id= "acc_name_input"></textarea>
+<br><br> <b id="create">set name</b>`;
+  
+  acc_name_input.onkeyup=()=>{
+(acc_name_input.value.length > 5 && acc_name_input.value.length < 13)?acc_name_input.style.borderBottom= "2px solid rgb(25,225,25)" :acc_name_input.style.borderBottom= "2px solid red"; 
+ };
+
+  create.onclick=()=>{
+    if(acc_name_input.value.length > 5 && acc_name_input.value.length < 13 && acc_name_input.value != null){
+      
+      name = acc_name_input.value;
+    active_page.innerHTML = `
+   <br><br><br><h2>Welcome ${name}</h2>`;
+    xancel.style.display = "none";
+setTimeout(()=>{active_page.style.top= "100%"},2500);
+  }
+      };
+       
+};
+
+
+
+info = document.querySelector('.info');
+info.onclick=function(){
+    active_box_check();
+
+active_page.innerHTML = ` <h3>Info, help and about</h3><hr><p> <b>Help</b> <br>
+<p><b>Gameplay:</b>tap on the obstacles to remove them. dont allow them to hit the car or else the car's health will drop and when the car's health hits 0, the game is over. You will be given 100 hitpoints(♥️) at the start of the game so try your best to get a high score! :)</p> <br> <p><b>Leaderboard:</b>the leaderboard is a competitive table that can be found in the "🏢" section. it contains list of all players high scores including yours. By default your name is 'me' and can be changed to the name you want, you'll be ranked alongside 9 others in the scoreboard each time you complete a game. Note: your score will always reset to 0 each time you start a game.</p> <br> <p><b>My name:</b> the My name section can be found by clicking the '👤' icon, it allows you to change your name </p><br><br> <b>About game :</b><br><p>Created by Lionel, 2021 sololearn productions™, Want more sololearn related info about dev? <a href= "https://www.sololearn.com/Profile/18925320/?ref=app">click here</a></p><br><br>`;
+};
+
+        /***Main_Game_Content...****/
+
+    
+  let ctx = canvas.getContext("2d");
+          
+   
+     function material(x,y,a,b,col){
+         this.x = x;
+         this.y = y;
+         this.a = a;
+         this.b = b;
+         this.col=col;
+         this.make =()=>{
+         ctx.beginPath();
+         ctx.fillStyle= col;
+         ctx.fillRect(x,y,a,b);
+         ctx.closePath();};
+     }
+
+    
+        
+  function car_constructor(x,y,a,b,col){
+       this.x = x;
+       this.y = y;
+       this.a = a;
+       this.b = b;
+       this.build = ()=>{    
+                        
+         ctx.beginPath();                        
+         ctx.drawImage(car,x,y,a,b);     
+       
+   
+        }; }
+          
+     
+          
+       function obstacle(p,q,a,b){
+         this.p = p;
+         this.q = q;
+         this.a = a;
+         this.b = b;
+         this.make =()=>{
+           ctx.beginPath()
+        let small_obstacle = new Image();
+        small_obstacle.src =        "https://i.ibb.co/jgYL7HY/rock-575687-1280.png";
+    
+      ctx.drawImage(small_obstacle,p,q,a,b);
+      
+ let motion = setInterval(move,20);
+ 
+window.addEventListener("mousemove",e=>{
+ if((e.x>=p && e.x>=a) && (e.y>=q && e.y>=b))
+ { p= innerWidth/0.9;
+   number +=1;
+   velocity+=0.025;
+   high_score.innerHTML =`High Score : ${number}`  }  });      
+    
+    function move(){
+         p-=velocity;                         
+         
+     if(health.innerHTML  <= 0 ){
+     
+     car.src=  explosion      
+         window.cancelAnimationFrame(FPS);
+         clearInterval(motion);
+         clearInterval(number_speed);             
+         p = innerWidth/0.9;
+             gameOver()
+          }
+         
+  else if(p<=innerWidth/3.5){ 
+         health.innerHTML  -= 20; 
+         health_indicator();                
+         p = innerWidth/0.9 }    
+         
+    else{}
+    }
+           
+
+           };   }
+ 
+            
+   
+ 
+ 
+        let sky = new  material(0,0,innerWidth,innerHeight, "rgba(0,0,225,0.6)" );
+     
+     
+     let soil = new material(0,innerHeight/1.111,innerWidth,innerHeight/10, "rgba(225,0,0,0.7)" );
+   
+   
+ let built_car = new car_constructor(innerWidth/90,innerHeight/1.185,110,60);
+ 
+ 
+ let obstacle_1 = new obstacle (innerWidth/0.9,innerHeight/1.1525,90,30);
+
+   
+    car.onload= ()=>{
+
+     function Engage (){          
+FPS =  window.requestAnimationFrame(Engage);   ctx.clearRect(0,0,window.innerWidth,window.innerHeight);        
+    
+    sky.make();
+    soil.make();   
+    built_car.build();
+    obstacle_1.make();     
+         }
+    
+    
+    start.onclick=()=>{
+      car.src=       "https://i.ibb.co/RpfwxjR/1633965503589.png";
+    game_menu.style.display= "none";
+    health_logo.style.display= "block";
+    health.style.display=      "block"; 
+    high_score.style.display=  "block";
+    
+      health.innerHTML = 100;
+      health.style.color= "lightGreen";
+      number = 0;           
+      Engage(); 
+      sound_track_1.play();        
+      }  };
+
+
+};
+</script>
+
+    </head>
+    <body>
+          <canvas></canvas> 
+ <div id= "health"> 100 </div>
+ <div id= "health_logo">♥️</div>
+ 
+ <div id="high_score">Shit</div>   
+ 
+<audio controls src= "https://dl.dropbox.com/s/naapb03y6oywlfk/InShot_20211020_083401109.mp3" id="sound_track_1" loop></audio>
+ 
+ 
+              <div id= "game_menu">
+ 
+  <img src=   "https://i.ibb.co/9V1JS0j/42be4022abe3b11c58e4711d3d0e720b.jpg"  id='home' alt= ''/>
+ 
+  
+<div id="start">Start»»</div> 
+
+<p class= "title">«RO∆D★BLOCK»</p>
+
+<a href= "https://www.sololearn.com/Profile/18925320/?ref=app" id="lionel">Follow Lionel</a>
+
+<button class="leaderBoard">🏢</button>
+<button class= "info">ℹ️</button>
+<button class= 'acc_name'>👤</button>
+
+<div id= 'active_page'></div>
+  <p id="xancel">❌</p> 
+
+              </div>
+    </body>
+</html>
