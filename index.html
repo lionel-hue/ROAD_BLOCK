@@ -2,344 +2,11 @@
 <html>
     <head>
         <title>Page Title</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
           <style>
-          body{ 
-margin:0; 
-font-family: 'Nunito', sans-serif;
-user-select:none;}
-
-
-#canvas{
-position: absolute;
-}
-
-#game_over{
-background:white;
-width:80%;
-height:20%;
-border-radius:0.5rem;
-display:block;
-box-shadow:2px 2px 2px rgba(0,0,0,0.19);
-top:-100%/*10%*/;
-left:10%;
-position:absolute;
-z-index:3;
-transition:1.5s;
-overflow-x:hidden;
-overflow-y:scroll;
-}
-
-#game_over *{
-text-align:center;
-justify-content:center;
-align-items:center;
-display:block;
-}
-
-
-#game_over div{
-font-weight:900;
-
-}
-
-#game_over b{
-position:absolute;
-width:40%;
-left:30%;
-background:rgba(0,0,0,0.2);
-border-radius:0.5rem;
-display:none;
-}
-
-
-#health_logo, #health, #high_score{
-position:fixed;
-z-index:3;
-display:none;
-}
-
-
-#health{
-font-weight:600;
-color:lightGreen; 
-top:2%; 
-left:88.5%;     
-}
-
-
-#health_logo{
-top:2%;  
-left:82.5%;
-}
-
-
-#high_score{
-top:2%;
-left:2%;
-font-weight:600;
-background:rgba(0,0,0,0.3);
-padding-left:2%;
-padding-right:2%;
-border-radius:0.5rem;
-color:white;
-}
-
-
-#home{
-z-index:2;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;    
-}
-
-
-#start{
-z-index:3;
-position:fixed;
-background:yellow;
-width:40vw;
-height:40vw;
-text-align:center;
-justify-content:center;
-display:flex;
-font-weight:900;
-font-size:24px;
-transform:rotate(-45deg);
-border-radius:0.5rem;
-top:90%;
-left:80%;
-animation-name:glow;    
-animation-duration:1.5s;
-animation-iteration-count:3;
-display:none;
-}
-
-@keyframes glow{
-      from{background:black;}
-        to{background:yellow;}
-}
-
-
-.title{
-      position:fixed;
-      z-index:3;
-      top:-3%;
-      font-weight:600;
-      font-size:35px;
-      background:rgba(0,0,0,0.3);
-      left:23%;
-      padding-left:2%;
-      padding-right:2%;
-      border-radius:0.9rem;
-      font-family: 'Bebas Neue', cursive;
-}
-
-
-#lionel{
-position:fixed;
-z-index:3;
-top:97.15%;
-text-align:center;
-justify-content:center;
-display:flex;
-font-weight:600;
-font-size:15px;
-background:white;
-left:0;
-padding-left:2%;
-padding-right:2%;
-border-top-right-radius:0.9rem;
-color:black;
-text-decoration:none;
-animation-name:bounce;
-animation-duration:2s;
-animation-iteration-count:infinite;
-}
-
-@keyframes bounce{
-          from{background:black;color:white;}
-           50%{background:white;color:black;}
-           to{background:black;color:white;}
-}
-
-.leaderBoard, .login, .info, .acc_name{
-position:fixed;
-z-index:3;
-width:20vw;
-height:20vw;
-background:black;
-color:white;
-border-radius:50%;
-font-size:19px;
-border:none;
-text-align:right;
-transition:1s;
-}
-
-
-.leaderBoard, .login, .info, .acc_name:hover{
-outline:none;
-}
-
-.leaderBoard{
-top:30%;
-left:-10%;
-}
-
-
-
-
-.info{
-top:70%;
-left:-10%;
-}
-
-
-
-.acc_name{
-top:50%;
-left:-10%;
-}
-
-
-
-#active_page{
-position:fixed;
-width:98%;
-height:40%;
-top:100%;
-left:1%;
-background:black;
-z-index:4;
-border-top-left-radius:0.9rem;
-border-top-right-radius:0.9rem;
-transition:1s;
-color:white; 
-text-align:center;
-overflow-y:scroll;
-overflow-x:hidden; 
-}
-
-
-
-
-
-#active_page #l_header, #name_header,#create{
-background:rgb(0,25,225);
-padding:2% 2% 2% 2%;
-border-radius:0.5rem;
-box-shadow:inset 0 2px 2px white;
-}
-
-
-#active_page #l_caption{
-width:100%;
-background:rgba(40,40,40);
-display:flex;
-justify-content:space-between;
-align-items:center;
-height:12%;
-}
-
-
-#active_page #l_score{
-background:rgb(40,40,40);
-width:96%;
-position:relative;  
-margin-top:0.5%;
-padding:0.5% 0 0.5% 0;
-border-radius:0.5rem;
-left:3%;
-display:flex;
-justify-content:space-between;
-}
-
-
-#active_page #acc_name_input{
-width:80%;
-border:none;
-background:black;
-border-bottom:2px solid red;
-height:10%;
-color:white;
-text-align:center;
-}
-
-
-#active_page #acc_name_input:hover{
-outline:none; 
-}
-
-
-#active_page #create{
-background:rgb(0,225,25);}
-
-
-#xancel{
-position:fixed;
-z-index:4;
-top:60%;
-left:90%;
-transition:1s;
-display:none;}
-
-
-#sound_track_1{
-    position:fixed;
-    z-index:4;
-    left:0;
-    display:none;
-}
+          body{ margin:0; }
           </style>
 
-<script src= "road_Block.js"></script>
-<link rel= "stylesheet" href="r_b.css"/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
-
-
-    </head>
-    <body>
-          <canvas></canvas> 
- <div id= "health"> 100 </div>
- <div id= "health_logo">♥️</div>
- 
- <div id="high_score">Shit</div>   
- 
-<audio controls src= "https://dl.dropbox.com/s/naapb03y6oywlfk/InShot_20211020_083401109.mp3" id="sound_track_1" loop></audio>
- 
- 
-              <div id= "game_menu">
- 
-  <img src=   "https://i.ibb.co/9V1JS0j/42be4022abe3b11c58e4711d3d0e720b.jpg"  id='home' alt= ''/>
- 
-  
-<div id="start">Start»»</div> 
-
-<p class= "title">«RO∆D★BLOCK»</p>
-
-<a href= "https://www.sololearn.com/Profile/18925320/?ref=app" id="lionel">Follow Lionel</a>
-
-<button class="leaderBoard">🏢</button>
-<button class= "info">ℹ️</button>
-<button class= 'acc_name'>👤</button>
-
-<div id= 'active_page'></div>
-  <p id="xancel">❌</p> 
-
-              </div>
-  <script>
-window.onload= ()=>{
+<script> window.onload= ()=>{
 
     let canvas =  
   document.getElementsByTagName("canvas")[0];
@@ -680,7 +347,334 @@ FPS =  window.requestAnimationFrame(Engage);   ctx.clearRect(0,0,window.innerWid
       }  };
 
 
-};
-</script>
-  </body>
+};  </script>
+<style> body *{
+font-family: 'Nunito', sans-serif;
+user-select:none;}
+
+
+#canvas{
+position: absolute;
+}
+
+#game_over{
+background:white;
+width:80%;
+height:20%;
+border-radius:0.5rem;
+display:block;
+box-shadow:2px 2px 2px rgba(0,0,0,0.19);
+top:-100%/*10%*/;
+left:10%;
+position:absolute;
+z-index:3;
+transition:1.5s;
+overflow-x:hidden;
+overflow-y:scroll;
+}
+
+#game_over *{
+text-align:center;
+justify-content:center;
+align-items:center;
+display:block;
+}
+
+
+#game_over div{
+font-weight:900;
+
+}
+
+#game_over b{
+position:absolute;
+width:40%;
+left:30%;
+background:rgba(0,0,0,0.2);
+border-radius:0.5rem;
+display:none;
+}
+
+
+#health_logo, #health, #high_score{
+position:fixed;
+z-index:3;
+display:none;
+}
+
+
+#health{
+font-weight:600;
+color:lightGreen; 
+top:2%; 
+left:88.5%;     
+}
+
+
+#health_logo{
+top:2%;  
+left:82.5%;
+}
+
+
+#high_score{
+top:2%;
+left:2%;
+font-weight:600;
+background:rgba(0,0,0,0.3);
+padding-left:2%;
+padding-right:2%;
+border-radius:0.5rem;
+color:white;
+}
+
+
+#home{
+z-index:2;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;    
+}
+
+
+#start{
+z-index:3;
+position:fixed;
+background:yellow;
+width:40vw;
+height:40vw;
+text-align:center;
+justify-content:center;
+display:flex;
+font-weight:900;
+font-size:24px;
+transform:rotate(-45deg);
+border-radius:0.5rem;
+top:90%;
+left:80%;
+animation-name:glow;    
+animation-duration:1.5s;
+animation-iteration-count:3;
+display:none;
+}
+
+@keyframes glow{
+      from{background:black;}
+        to{background:yellow;}
+}
+
+
+.title{
+      position:fixed;
+      z-index:3;
+      top:-3%;
+      font-weight:600;
+      font-size:35px;
+      background:rgba(0,0,0,0.3);
+      left:23%;
+      padding-left:2%;
+      padding-right:2%;
+      border-radius:0.9rem;
+      font-family: 'Bebas Neue', cursive;
+}
+
+
+#lionel{
+position:fixed;
+z-index:3;
+top:97.15%;
+text-align:center;
+justify-content:center;
+display:flex;
+font-weight:600;
+font-size:15px;
+background:white;
+left:0;
+padding-left:2%;
+padding-right:2%;
+border-top-right-radius:0.9rem;
+color:black;
+text-decoration:none;
+animation-name:bounce;
+animation-duration:2s;
+animation-iteration-count:infinite;
+}
+
+@keyframes bounce{
+          from{background:black;color:white;}
+           50%{background:white;color:black;}
+           to{background:black;color:white;}
+}
+
+.leaderBoard, .login, .info, .acc_name{
+position:fixed;
+z-index:3;
+width:20vw;
+height:20vw;
+background:black;
+color:white;
+border-radius:50%;
+font-size:19px;
+border:none;
+text-align:right;
+transition:1s;
+}
+
+
+.leaderBoard, .login, .info, .acc_name:hover{
+outline:none;
+}
+
+.leaderBoard{
+top:30%;
+left:-10%;
+}
+
+
+
+
+.info{
+top:70%;
+left:-10%;
+}
+
+
+
+.acc_name{
+top:50%;
+left:-10%;
+}
+
+
+
+#active_page{
+position:fixed;
+width:98%;
+height:40%;
+top:100%;
+left:1%;
+background:black;
+z-index:4;
+border-top-left-radius:0.9rem;
+border-top-right-radius:0.9rem;
+transition:1s;
+color:white; 
+text-align:center;
+overflow-y:scroll;
+overflow-x:hidden; 
+}
+
+
+
+
+
+#active_page #l_header, #name_header,#create{
+background:rgb(0,25,225);
+padding:2% 2% 2% 2%;
+border-radius:0.5rem;
+box-shadow:inset 0 2px 2px white;
+}
+
+
+#active_page #l_caption{
+width:100%;
+background:rgba(40,40,40);
+display:flex;
+justify-content:space-between;
+align-items:center;
+height:12%;
+}
+
+
+#active_page #l_score{
+background:rgb(40,40,40);
+width:96%;
+position:relative;  
+margin-top:0.5%;
+padding:0.5% 0 0.5% 0;
+border-radius:0.5rem;
+left:3%;
+display:flex;
+justify-content:space-between;
+}
+
+
+#active_page #acc_name_input{
+width:80%;
+border:none;
+background:black;
+border-bottom:2px solid red;
+height:10%;
+color:white;
+text-align:center;
+}
+
+
+#active_page #acc_name_input:hover{
+outline:none; 
+}
+
+
+#active_page #create{
+background:rgb(0,225,25);}
+
+
+#xancel{
+position:fixed;
+z-index:4;
+top:60%;
+left:90%;
+transition:1s;
+display:none;}
+
+
+#sound_track_1{
+    position:fixed;
+    z-index:4;
+    left:0;
+    display:none;
+}</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+
+    </head>
+    <body>
+          <canvas></canvas> 
+ <div id= "health"> 100 </div>
+ <div id= "health_logo">♥️</div>
+ 
+ <div id="high_score">Created by Lionel :)</div>   
+ 
+<audio controls src= "https://dl.dropbox.com/s/naapb03y6oywlfk/InShot_20211020_083401109.mp3" id="sound_track_1" loop></audio>
+ 
+ 
+              <div id= "game_menu">
+ 
+  <img src=   "https://i.ibb.co/9V1JS0j/42be4022abe3b11c58e4711d3d0e720b.jpg"  id='home' alt= ''/>
+ 
+  
+<div id="start">Start»»</div> 
+
+<p class= "title">«RO∆D★BLOCK»</p>
+
+<a href= "https://www.sololearn.com/Profile/18925320/?ref=app" id="lionel">Follow Lionel</a>
+
+<button class="leaderBoard">🏢</button>
+<button class= "info">ℹ️</button>
+<button class= 'acc_name'>👤</button>
+
+<div id= 'active_page'></div>
+  <p id="xancel">❌</p> 
+
+              </div>
+    </body>
 </html>
